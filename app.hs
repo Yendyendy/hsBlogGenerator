@@ -5,7 +5,8 @@ import           Data.CaseInsensitive (mk)
 import Network.Wai
 import Network.HTTP.Types
 import Network.Wai.Handler.Warp (run)
-import Html ( rendercan, Html, append_, p_, h1_, html_ )
+import Html.Internal
+    ( Html, html_, p_, h1_, append_, rendercan, ul_, ol_, code_ )
 import Basement.Block (index)
 
 app :: Application
@@ -43,7 +44,10 @@ index_ =
                 (h1_ "Haskell Blog Generator")
                 (append_
                     (p_ "Paragraph 1")
-                    (p_ "Paragraph 2")
+                    (append_
+                        (p_ "Paragraph 2")
+                        (code_ "putStrLn = 'Hello Word'")
+                    )
                 )
         )
 
@@ -51,10 +55,16 @@ indexCharacter_ :: Html
 indexCharacter_ = 
     html_
         "Characters"
-        ( append_
-                (h1_ "Haskell Blog Generator")
-                (p_ "Paragraph 1")
-                
+        (append_
+            ( append_
+                (h1_ "BA favourite")
+                (ul_ [p_"Toki", p_"Yuuka", p_"Azusa", p_"Neru"]) 
+            )
+            ( append_
+                (h1_ "BA story favourite")
+                (ol_ [p_"Aris", p_"Hoshino", p_"Aru", p_"Koharu", p_"Yuzu"]) 
+            )
+
         )
 
 indexNotFound_ :: Html
