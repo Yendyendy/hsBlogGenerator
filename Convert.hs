@@ -4,6 +4,9 @@ import qualified Markup
 import qualified Html
 import qualified GHC.Exts.Heap as Html
 
+convert title = Html.html_ title . foldMap convertStructure
+
+
 convertStructure structure = 
     case structure of
         Markup.Heading n txt -> 

@@ -5,8 +5,7 @@ import           Data.CaseInsensitive (mk)
 import Network.Wai
 import Network.HTTP.Types
 import Network.Wai.Handler.Warp (run)
-import Html.Internal
-    ( Html, html_, p_, h1_, append_, rendercan, ul_, ol_, code_ )
+import Html.Internal 
 import Basement.Block (index)
 
 app :: Application
@@ -36,19 +35,29 @@ notFound = responseLBS
     (LB8.pack (rendercan indexNotFound_))
 
 -- index_
-index_ :: Html
+-- index_ :: Html
+-- index_ = 
+--     html_
+--         "Haskell web"
+--         ( append_
+--                 (h1_ "Haskell Blog Generator")
+--                 (append_
+--                     (p_ "Paragraph 1")
+--                     (append_
+--                         (p_ "Paragraph 2")
+--                         (code_ "putStrLn = 'Hello Word'")
+--                     )
+--                 )
+--         )
+
 index_ = 
     html_
         "Haskell web"
-        ( append_
-                (h1_ "Haskell Blog Generator")
-                (append_
-                    (p_ "Paragraph 1")
-                    (append_
-                        (p_ "Paragraph 2")
-                        (code_ "putStrLn = 'Hello Word'")
-                    )
-                )
+        ( h_ 1 "Haskell Blog Generator"
+            <> p_ "Paragraph 1"
+            <> ( p_ "Paragraph 2"
+                <> code_ "putStrLn ) 'Hello Word' >>="
+            )
         )
 
 indexCharacter_ :: Html
